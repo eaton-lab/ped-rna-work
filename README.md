@@ -1,15 +1,21 @@
 
 
-
+# OUTLINE 
 
 1. trinity assembly of cds and translation to proteins [Yue]
-2. orthogroup hierarchical assembly of protein seqs [Yue]
-3. alignment and trimming of cds sequences in orthogroups [`run_macse2_parallel`]
-4. infer partitioned ML trees [`run_raxml_parallel`]
-5. filter dataset to high quality alignments and trees [...]
-6. infer sptree from unrooted gene trees [...]
-7. infer set of reconciled gene trees given the species tree [...]
-8. 
+2. orthogroup inference from protein seqs in Orthofinder [Yue]
+3. alignment and trimming of cds sequences in each orthogroup [`twig macse`]
+4. infer partitioned ML trees from CDS [`run_raxml_parallel`]
+5. filter tree set to discard bad tips and small trees [`twig tree-filter`]
+6. infer sptree from unrooted gene trees [`run_astral`]
+7. root gene trees based on sptree outgroups to get rooted-multilabeled-trees [`twig tree-rooter`]
+8. root gene trees based on sptree outgroups to get rooted-singlecopy-trees [`twig tree-rooter`]
+9. infer sptree in astral and networks in phylonet [...]
+11. run csubst on rooted-multilabeled-tree set [...]
+11. run generax to label edges as dups/losses [...]
+12. run csubst on gtree, reconciled tree, and unreconciled tree
+13. compute csubst score differences on trees
+
 
 ```bash
 # run macse pipeline on each CDS file
