@@ -1,0 +1,8 @@
+CMD: /home/deren/miniconda3/envs/ped-rnas/bin/twig tree-filter -i SPTREE/tree-set-full-filtered-rooted.nwk -c 1
+ntrees start = 8296
+trees filtered by minmap = 0
+trees filtered by require-outgroup = 0
+trees filtered by min-tips = 0
+trees filtered by max-copies = 4196
+ntrees end = 4100
+outlier tips removed = 0
