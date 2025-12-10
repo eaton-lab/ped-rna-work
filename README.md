@@ -24,103 +24,83 @@
 	-s 20 \
 	-ei 5 -eo 10 --exclude-outliers \
 	--imap SPTREE/IMAP \
-	> SPTREE/tree-set-full.nwk
+	> SPTREE/tree-set-full-filtered.nwk \
+	2> SPTREE/tree-set-full-filtered.log
+# 8374 trees passed filtering
 ```
 
 ### 7. infer sptree from unrooted gene trees [`run_astral`]
-```./scripts/run_astral
-	-t SPTREE/tree-set-full.nwk \
-	-o SPTREE/full-sptree.nwk \
+```./scripts/run_astral \
+	-t SPTREE/tree-set-full-filtered.nwk \
+	-o SPTREE/sptree-full-filtered.nwk \
 	-r SRR11748982 \
-	-c 20
+	-c 20 \
+	2> SPTREE/sptree-full-filtered.log
 ```
 
 ### 8. root gene trees based on sptree outgroups to get rooted-multilabeled-trees [`twig tree-rooter`]
 ```twig tree-rooter \
-	-i SPTREE/tree-set-full.nwk \
-	-
-	> SPTREE/tree-set-rooted-multi-copy.nwk ...
-
+	-i SPTREE/tree-set-full-filtered.nwk \
+	-s SPTREE/sptree-full-filtered.nwk \
+	-R SPTREE/OUTGROUPS.txt \ 
+	> SPTREE/tree-set-full-filtered-rooted.nwk \
+	2> SPTREE/tree-set-full-filtered-rooted.log
+# 8296 trees rerooted
 ```
 
-### 9. root gene trees based on sptree outgroups to get rooted-singlecopy-trees [`twig tree-rooter`]
-```twig tree-rooter -i SPTREE/tree-set-full.nwk > SPTREE/tree-set-rooted-single-copy.nwk ...```
+### 9. filter to keep only single-copy trees from the rooted trees [`twig tree-filter`]
+```twig tree-filter \
+	-i SPTREE/tree-set-full-filtered-rooted.nwk \
+	-c 1 \
+	> SPTREE/tree-set-full-filtered-rooted-singlecopy.nwk \
+	2> SPTREE/tree-set-full-filtered-rooted-singlecopy.log
+# 4100 trees
+```
 
-### 10. infer sptree in astral and networks in phylonet [...]
-```...```
+### 10. infer sptree for multilabeled filtered tree set in astral [...]
+```./scripts/run_astral \
+	-t SPTREE/tree-set-full-filtered-rooted.nwk \
+	-o SPTREE/sptree-full-filtered-rooted.nwk \
+	-r SRR11748982 \
+	-c 20 \
+	> SPTREE/sptree-full-filtered-rooted.log
+```
 
-### 11. run csubst on rooted-multilabeled-tree set [...]
-```...```
+### 11. infer sptree for multilabeled filtered tree set in astral [...]
+```./scripts/run_astral \
+	-t SPTREE/tree-set-full-filtered-rooted-singlecopy.nwk \
+	-o SPTREE/sptree-full-filtered-rooted-singlecopy.nwk \
+	-r SRR11748982 \
+	-c 20 \
+	> SPTREE/sptree-full-filtered-rooted-singlecopy.log
+```
 
-### 11. run generax to label edges as dups/losses [...]
-twig macse \                                                                                                                                                             
-    -i "${NT}" -o "${DIR}" -p "${HOG}" \                                                                                                                                 
-    -mh "${HOMOLOGY11}" \                                                                                                                                                
-    -mi "${HOMOLOGY12}" \                                                                                                                                                
-    -mc "${MIN_COV}" \                                                                                                                                                   
-    -tx "${TRIM1E}" \                                                                                                                                                    
-    -ti "${TRIM1I}" \                                                                                                                                                    
-    -xa \                                                                                                                                                                
-    -l D | tee -a "${LOG}"
+### 12. filter trees for network analysis 1 (require >=15 from IMAP)
+```twig tree-filter \
+	-i SPTREE/tree-set-full-filtered-rooted.nwk \
+	-I SPTREE/SPECIES-SAMPLING-39.txt \
+	-c 15 \
+	--subsample 
+# 
+```
+
+
+
+### 13. run csubst on rooted-multilabeled-tree set [...]
+```
+# prepare fastas to match to tip names
+
+
+# prepare csubst trait file
+
+
+# prepare 
+
+```
     
 
 12. run csubst on gtree, reconciled tree, and unreconciled tree
 13. compute csubst score differences on trees
-
-
-```bash
-# run macse pipeline on each CDS file
-twig macse -...
-
-# run tree inference on each CDS file
-./scripts/run_raxml ...
-
-# get all trees in one multi-fasta
-cat RESULTS4/*/*.final.nt.fa.raxml.support > RESULTS4.trees.nwk
-
-# trim/filter trees
-twig ...
-```
-
-
-  -h, --help                                   show this help message and exit
-  -d str, --delim str                          delimiter to split tip labels
-  -i int [int ...], --idxs int [int ...]       index of delim'd items to keep
-  -j str, --join str                           join character on delim'd items
-  -k str [str ...], --keep-set str [str ...]   tip labels to keep
-  -o path, --out path                          outfile path prefix else result is printed to stdout
-  -t path [path ...], --trees path [path ...]  glob path to tree files
-  -m int, --min-tips int                       min tips after pruning [4]
-  -c int, --max-copies int                     filter trees with >c gene copies from a taxon [None]
-  -O path, --outgroups path                    filepath containing tip labels as outgroups for -eo
-  -eo float, --edge-outlier-outgroup float     exclude outgroup edges >eo stdev from the mean len
-  -ei float, --edge-outlier-ingroup float      exclude ingroup edges >ei stdev from the mean len
-
-
-```bash
-# filter trees: single-copy 
-$ scripts/run_tree_filter \
-	-d "|" \
-	-i 0 \
-	-m 20 \
-	-c 1 \
-	-O SPTREE/OUTGROUPS.txt \
-	-o SPTREE/single-copy-gtrees.nwk \
-	-t RESULTS4/*/*.final.nt.fa.raxml.support
-	
-# infer species tree
-$ scripts/run_astral \
-	-c 20 \
-	-r SRR11748982 \
-	-t SPTREE/single-copy-gtrees.nwk \
-	-o SPTREE/single-copy-gtrees-sptree.nwk
-
-# root trees
-./scripts/run_tree_rooting \
-	-t SPTREE/single-copy-gtrees.nwk \
-	-s SPTREE/single-copy-gtrees-sptree.nwk \
-	-o SPTREE/single-copy-gtrees-rooted.nwk \
-	-O SPTREE/OUTGROUPS-PLUS.txt
 
 # filter: get subset rooted gtrees and keep collapsed root edge
 $ scripts/run_tree_filter \
@@ -133,4 +113,4 @@ $ scripts/run_tree_filter \
 	-o SPTREE/single-copy-subset31.nwk \
 	-O SPTREE/OUTGROUPS.txt \
 	--collapse-outgroup outgroup
-```
+
