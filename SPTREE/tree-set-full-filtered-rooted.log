@@ -1,0 +1,4 @@
+2025-12-10 00:12:40 | INFO     | newick.py            | empty or non-numeric node labels detected and set as 'name' feature, not 'support'
+2025-12-10 00:12:40 | DEBUG    | tree_rooter.py       | ordered rooting clades: [['SRR11748982'], ['SRR11934227'], ['DRR082665'], ['SRR104381', 'SRR5150740', 'DRR234970'], ['DRR234970'], ['SRR104381']]
+'rerooted': 8296
+'not-rerooted': 78
