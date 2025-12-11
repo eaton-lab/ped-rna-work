@@ -1,0 +1,45 @@
+2025-12-11 19:40:29 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:29 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:29 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:35 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:35 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:36 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:37 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:38 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:42 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:43 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:45 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:45 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:48 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:48 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:48 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:50 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:50 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:51 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:52 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:55 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:55 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:57 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:58 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:40:59 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:00 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:03 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:09 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:21 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:27 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:27 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:30 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:30 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:32 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:34 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:35 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:38 | WARNING  | node.py              | cannot delete root Node.
+2025-12-11 19:41:39 | WARNING  | node.py              | cannot delete root Node.
+CMD: /home/deren/miniconda3/envs/ped-rnas/bin/twig tree-filter -i TREES/tree-set-full.nwk -d | -di 0 -m 20 -ei 5 -eo 10 --exclude-outliers --imap TREES/IMAP.tsv --require --relabel-delim
+ntrees start = 12950
+trees filtered by minmap = 0
+trees filtered by require-outgroup = 3618
+trees filtered by min-tips = 0
+trees filtered by max-copies = 0
+ntrees end = 9332
+outlier tips removed = 22146
