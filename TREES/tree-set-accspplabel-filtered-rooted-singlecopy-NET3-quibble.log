@@ -1,0 +1,7 @@
+ntrees start = 9783
+trees filtered by minmap = 0
+trees filtered by require-outgroup = 0
+trees filtered by min-tips = 7634
+trees filtered by max-copies = 2
+ntrees end = 2147
+outlier tips removed = 0

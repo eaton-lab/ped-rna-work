@@ -1,0 +1,8 @@
+CMD: /home/deren/miniconda3/envs/ped-rnas/bin/twig tree-filter -i TREES/tree-set-glabel-filtered-rooted.nwk -d | -di 0 -I NET2.tsv -ri -c 1 -m 20 --subsample --collapse --require
+ntrees start = 9783
+trees filtered by minmap = 0
+trees filtered by require-outgroup = 0
+trees filtered by min-tips = 4132
+trees filtered by max-copies = 6
+ntrees end = 5645
+outlier tips removed = 0
